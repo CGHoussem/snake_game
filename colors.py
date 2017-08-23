@@ -1,0 +1,14 @@
+WHITE       = (255, 255, 255)
+BLACK       = (0, 0, 0)
+GREY        = (200, 200, 200)
+DARK_GREY   = (50, 50, 50)
+DARK_BLUE   = (50, 50, 135)
+DARK_GREEN  = (0, 125, 80)
+VIOLET      = (171, 120, 234)
+PINK        = (239, 120, 209)
+RED         = (255, 0, 0)
+ORANGE      = (255, 136, 73)
+YELLOW      = (255, 209, 8)
+LIGHT_GREEN = (214, 255, 214)
+
+allColors = [BLACK, DARK_GREY, DARK_BLUE, DARK_GREEN, VIOLET, PINK, RED, ORANGE, YELLOW, DARK_GREEN, DARK_BLUE, WHITE]

@@ -1,27 +1,26 @@
 import pygame
-#import shelve
 
 from random import randrange
 from math import ceil
 
-from Classes.Button import *
-from Classes.Snake import *
-from Classes.Apple import *
-from functions import *
+from Includes.Button import *
+from Includes.Snake import *
+from Includes.Apple import *
+from Includes.functions import *
 
-# init
+# Init
 [screen, clock, myFont, myMenuFont, messageFont,
-myFont2, grassTile, wallTile, appleSprite,
-snakeHeadSprite, snakeBodyTile, appleEatenSound, gameoverMusic,
-playingMusic, menuMusic, delay, starting, menu, done, retry] = init()
+ myFont2, grassTile, wallTile, appleSprite,
+ snakeHeadSprite, snakeBodyTile, appleEatenSound, gameoverMusic,
+ playingMusic, menuMusic, delay, starting, menu, done, retry] = init()
 
 # Draw Background
 screen.fill(BLACK)
 
 # Draw Menu
-startButton = Button("Play Game", screenWidth / 2 - 75, screenHeight / 2 - 55 - 5, 150, 50)
+playButton = Button("Play Game", screenWidth / 2 - 75, screenHeight / 2 - 55 - 5, 150, 50)
 scoresButton = Button("Scoreboard", screenWidth / 2 - 100, screenHeight / 2 + 5, 200, 50)
-startButton.draw(screen)
+playButton.draw(screen)
 scoresButton.draw(screen)
 pygame.display.flip()
 
@@ -34,17 +33,14 @@ while menu:
             if event.key == pygame.K_SPACE:
                 done = False
                 menu = False
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            # Click on 'Play Game' Button
-            if pygame.mouse.get_pos()[0] >= screenWidth / 2 - 75 and pygame.mouse.get_pos()[1] >= screenHeight / 2 - 55 - 5:
-                if pygame.mouse.get_pos()[0] <= screenWidth / 2 - 75 + 150 and pygame.mouse.get_pos()[1] <= screenHeight / 2 - 55 - 5 + 50:
-                    done = False
-                    menu = False
-            # Click on 'Show Scores' Button
-            elif pygame.mouse.get_pos()[0] >= screenWidth / 2 - 100 and pygame.mouse.get_pos()[1] >= screenHeight / 2 + 5:
-                if pygame.mouse.get_pos()[0] <= screenWidth / 2 - 100 + 200 and pygame.mouse.get_pos()[1] <= screenHeight / 2 + 5 + 50:
-                    menu = False
-                    showScores(screen, myMenuFont, myFont2)
+
+    if playButton.clicked():
+        done = False
+        menu = False
+    elif scoresButton.clicked():
+        menu = False
+        showScores(screen, myMenuFont, myFont2)
+
 
 # Draw Background
 screen.fill(BLACK)

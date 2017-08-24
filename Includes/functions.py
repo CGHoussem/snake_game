@@ -4,6 +4,7 @@ import os.path
 import json
 from constraints import *
 
+
 def init():
     pygame.init()
     pygame.font.init()
@@ -35,9 +36,9 @@ def init():
     done = True
     retry = False
 
-    return [screen, clock, myFont, 
-            myMenuFont, messageFont, 
-            myFont2, grassTile, 
+    return [screen, clock, myFont,
+            myMenuFont, messageFont,
+            myFont2, grassTile,
             wallTile, appleSprite,
             snakeHeadSprite, snakeBodyTile,
             appleEatenSound, gameoverMusic,

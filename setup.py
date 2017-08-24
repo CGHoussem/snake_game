@@ -12,5 +12,5 @@ cx_Freeze.setup(
                                              "Sounds/gameover.wav",
                                              "Sounds/playing.wav",
                                              "Sounds/menu.wav"]}},
-    executables=[cx_Freeze.Executable("snake_game.py")]
+    executables=[cx_Freeze.Executable("__main__.py")]
 )

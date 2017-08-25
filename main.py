@@ -15,32 +15,34 @@ from Includes.functions import *
  snakeHeadSprite, snakeBodyTile, appleEatenSound, gameoverMusic,
  playingMusic, menuMusic, delay, starting, menu, done, retry] = init()
 
-# Draw Background
-screen.fill(BLACK)
+playButton = Button("Play Game", SCREEN_WIDTH / 2 - 75, SCREEN_HEIGHT / 2 - 55 - 5, 150, 50)
+scoresButton = Button("Scoreboard", SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 + 5, 200, 50)
+
+
+def drawMenu():
+    screen.fill(BLACK)
+    playButton.draw(screen)
+    scoresButton.draw(screen)
+    pygame.display.flip()
 
 # Draw Menu
-playButton = Button("Play Game", screenWidth / 2 - 75, screenHeight / 2 - 55 - 5, 150, 50)
-scoresButton = Button("Scoreboard", screenWidth / 2 - 100, screenHeight / 2 + 5, 200, 50)
-playButton.draw(screen)
-scoresButton.draw(screen)
-pygame.display.flip()
+drawMenu()
 
 menuMusic.play(loops=-1)
+
 while menu:
+    # This comment seems to optimize the event read
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
+            print("REQUEST: Qutting request has been called from MENU LOOP.")
             quitGame(screen, False)
-        elif event.type == pygame.KEYUP:
-            if event.key == pygame.K_SPACE:
-                done = False
-                menu = False
 
     if playButton.clicked():
         done = False
         menu = False
     elif scoresButton.clicked():
-        menu = False
         showScores(screen, myMenuFont, myFont2)
+        drawMenu()
 
 
 # Draw Background
@@ -49,8 +51,8 @@ screen.fill(BLACK)
 # Ask Name
 name = ask(screen, "Name", messageFont)
 
-snake = Snake(ceil(screenWidth / 2), ceil(screenHeight / 2), 20)
-apple = Apple(randrange(40, screenWidth - 40, 20), randrange(40, screenHeight - 40, 20))
+snake = Snake(ceil(SCREEN_WIDTH / 2), ceil(SCREEN_HEIGHT / 2), 20)
+apple = Apple(randrange(40, SCREEN_WIDTH - 40, 20), randrange(40, SCREEN_HEIGHT - 40, 20))
 spider = Spider(snake, apple)
 
 playing_music = False
@@ -141,8 +143,8 @@ while not done:
     # Draw Score & FPS
     scoreLabel = myFont2.render("Score = " + str(snake.score), 0, BLACK)
     fpsLabel = myFont2.render("FPS = " + str(int(clock.get_fps())), 0, BLACK)
-    screen.blit(scoreLabel, (20 * 2, screenHeight - (20 * 2) - scoreLabel.get_height()))
-    screen.blit(fpsLabel, (20 * 2, screenHeight - (20 * 3) - scoreLabel.get_height()))
+    screen.blit(scoreLabel, (20 * 2, SCREEN_HEIGHT - (20 * 2) - scoreLabel.get_height()))
+    screen.blit(fpsLabel, (20 * 2, SCREEN_HEIGHT - (20 * 3) - scoreLabel.get_height()))
 
     pygame.display.flip()
 

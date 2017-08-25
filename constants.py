@@ -1,5 +1,5 @@
-screenWidth = 600
-screenHeight = 400
+SCREEN_WIDTH = 600
+SCREEN_HEIGHT = 400
 
 WHITE       = (255, 255, 255)
 BLACK       = (0, 0, 0)

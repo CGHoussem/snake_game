@@ -1,5 +1,5 @@
 import pygame
-from constraints import screenWidth, screenHeight
+from constants import SCREEN_WIDTH, SCREEN_HEIGHT
 from random import randrange
 
 class Spider():
@@ -19,8 +19,8 @@ class Spider():
 		screen.blit(self.sprite, (self.x, self.y))
 
 	def pickLocation(self, snake, apple):
-		self.x = randrange(20, screenWidth-60, 20)
-		self.y = randrange(20, screenHeight-40, 20)
+		self.x = randrange(20, SCREEN_WIDTH-60, 20)
+		self.y = randrange(20, SCREEN_HEIGHT-40, 20)
 		if self.x == apple.x and self.y == apple.y:
 			print("Pick another location spider! <> Apple")
 			self.pickLocation(snake, apple)

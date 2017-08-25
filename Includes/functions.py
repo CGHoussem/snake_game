@@ -2,7 +2,7 @@ import pygame
 import sys
 import os.path
 import json
-from constraints import *
+from constants import *
 
 
 def init():
@@ -11,7 +11,7 @@ def init():
     pygame.mixer.init()
 
     pygame.display.set_caption("Houssem's Snake Game")
-    screen = pygame.display.set_mode((screenWidth, screenHeight))
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
 
     myFont = pygame.font.SysFont('Comic Sans MS', 60)
@@ -91,17 +91,17 @@ def ask(screen, question, messageFont):
 
 
 def drawWalls(screen, wallTile):
-    for i in range(0, screenWidth, 20):
+    for i in range(0, SCREEN_WIDTH, 20):
         screen.blit(wallTile, (i, 0))
-        screen.blit(wallTile, (i, screenHeight - 20))
-    for i in range(0, screenHeight, 20):
+        screen.blit(wallTile, (i, SCREEN_HEIGHT - 20))
+    for i in range(0, SCREEN_HEIGHT, 20):
         screen.blit(wallTile, (0, i))
-        screen.blit(wallTile, (screenWidth - 20, i))
+        screen.blit(wallTile, (SCREEN_WIDTH - 20, i))
 
 
 def drawBackground(screen, grassTile):
-    for x in range(20, screenWidth - 20, 20):
-        for y in range(20, screenHeight - 20, 20):
+    for x in range(20, SCREEN_WIDTH - 20, 20):
+        for y in range(20, SCREEN_HEIGHT - 20, 20):
             screen.blit(grassTile, (x, y))
 
 
@@ -114,15 +114,15 @@ def showScores(screen, myMenuFont, myFont2):
         with open("scores.txt") as infile:
             data = json.load(infile)
             titleLabel = myMenuFont.render("Scoreboard", 0, WHITE)
-            screen.blit(titleLabel, (screenWidth / 2 - titleLabel.get_width() / 2, titleLabel.get_height()))
+            screen.blit(titleLabel, (SCREEN_WIDTH / 2 - titleLabel.get_width() / 2, titleLabel.get_height()))
             count = titleLabel.get_height()
             for player in data['players']:
                 count += 20
                 playerScoreLabel = myFont2.render(player['name'] + " ........................ " + str(player['score']), 0, WHITE)
-                screen.blit(playerScoreLabel, (screenWidth / 2 - playerScoreLabel.get_width() / 2, count + playerScoreLabel.get_height()))
+                screen.blit(playerScoreLabel, (SCREEN_WIDTH / 2 - playerScoreLabel.get_width() / 2, count + playerScoreLabel.get_height()))
     else:
         titleLabel = myMenuFont.render("Scoreboard is empty", 0, WHITE)
-        screen.blit(titleLabel, (screenWidth / 2 - titleLabel.get_width() / 2, screenHeight / 2 - titleLabel.get_height() / 2))
+        screen.blit(titleLabel, (SCREEN_WIDTH / 2 - titleLabel.get_width() / 2, SCREEN_HEIGHT / 2 - titleLabel.get_height() / 2))
 
     pygame.display.flip()
 
@@ -136,7 +136,6 @@ def showScores(screen, myMenuFont, myFont2):
 
 
 def saveData(screen, name, snake):
-    # Draw Background
     screen.fill(BLACK)
 
     if os.path.isfile("scores.txt"):
@@ -161,7 +160,7 @@ def pauseGame(screen, myFont):
     while pause:
         screen.fill(GREY)
         pauseLabel = myFont.render("Pause", 1, BLACK)
-        screen.blit(pauseLabel, (screenWidth / 2 - pauseLabel.get_width() / 2, screenHeight / 2 - pauseLabel.get_height() / 2))
+        screen.blit(pauseLabel, (SCREEN_WIDTH / 2 - pauseLabel.get_width() / 2, SCREEN_HEIGHT / 2 - pauseLabel.get_height() / 2))
         pygame.display.flip()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

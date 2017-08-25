@@ -1,4 +1,4 @@
-from constraints import *
+from constants import *
 from random import randrange
 from math import ceil
 import pygame
@@ -101,10 +101,10 @@ class Snake:
     def checkBorders(self):
         if (self.x[0] >= screenWidth - self.radius or self.x[0] < self.radius):
             return True
-        if (self.y[0] < self.radius or self.y[0] >= screenHeight - self.radius):
+        if (self.y[0] < self.radius or self.y[0] >= SCREEN_HEIGHT - self.radius):
             return True
 
     def reset(self):
         self.total = 2
         self.score = 0
-        self.x[0], self.y[0] = ceil(screenWidth / 2), ceil(screenHeight / 2)
+        self.x[0], self.y[0] = ceil(screenWidth / 2), ceil(SCREEN_HEIGHT / 2)

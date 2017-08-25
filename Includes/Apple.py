@@ -1,4 +1,4 @@
-from constraints import *
+from constants import *
 from random import randrange
 
 class Apple:
@@ -11,8 +11,8 @@ class Apple:
         self.y = y
         
     def pickLocation(self, snake):
-        self.x = randrange(self.radius*2, screenWidth-self.radius*2, self.radius)
-        self.y = randrange(self.radius*2, screenHeight-self.radius*2, self.radius)
+        self.x = randrange(self.radius*2, SCREEN_WIDTH-self.radius*2, self.radius)
+        self.y = randrange(self.radius*2, SCREEN_HEIGHT-self.radius*2, self.radius)
         for i in range(0, snake.total, 1):
             if self.x == snake.x[i] and self.y == snake.y[i]:
                 self.pickLocation(snake)

@@ -1,5 +1,5 @@
 import pygame
-from constraints import *
+from constants import *
 
 
 class Button:
@@ -19,7 +19,7 @@ class Button:
         return (self.x, self.y)
 
     def setCords(self, x, y):
-        if self.x >= 0 and self.x <= screenWidth and self.y >= 0 and self.y <= screenHeight:
+        if self.x >= 0 and self.x <= SCREEN_WIDTH and self.y >= 0 and self.y <= SCREEN_HEIGHT:
             self.x = x
             self.y = y
 

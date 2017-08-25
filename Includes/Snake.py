@@ -17,7 +17,7 @@ class Snake:
         self.y[0] = y
         self.radius = radius
 
-    def update(self, delay):
+    def update(self):
         for i in range(self.total - 1, 0, -1):
             self.x[i] = self.x[i - 1]
             self.y[i] = self.y[i - 1]
@@ -67,11 +67,30 @@ class Snake:
             self.direction = 3
         return sprite
 
-    def checkCollision(self, apple):
-        if (self.x[0] == apple.x and self.y[0] == apple.y):
+    def checkCollision(self, apple, spider):
+        if self.x[0] == apple.x and self.y[0] == apple.y:
             self.x.append(self.x[self.total - 1])
             self.y.append(self.y[self.total - 1])
             self.score += 1
+            self.total += 1
+            return True
+        if self.x[0] == spider.x and self.y[0] == spider.y:
+            spider.visible = False
+            self.total += 2
+            self.x.append(0)
+            self.y.append(0)
+            self.x.append(0)
+            self.y.append(0)
+
+            self.x.insert(self.total - 2, self.x[self.total - 2])
+            self.y.insert(self.total - 2, self.y[self.total - 2])
+            self.x.insert(self.total - 1, self.x[self.total - 1])
+            self.y.insert(self.total - 1, self.y[self.total - 1])
+            #self.x.append(self.x[self.total - 2])
+            #self.y.append(self.y[self.total - 2])
+            #self.x.append(self.x[self.total - 1])
+            #self.y.append(self.y[self.total - 1])
+            self.score += 2
             return True
 
     def checkSelf(self):

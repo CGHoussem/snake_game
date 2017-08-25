@@ -1,10 +1,11 @@
 import pygame
 
-from random import randrange
+from random import randrange, random
 from math import ceil
 
 from Includes.Button import *
 from Includes.Snake import *
+from Includes.Spider import *
 from Includes.Apple import *
 from Includes.functions import *
 
@@ -50,16 +51,20 @@ name = ask(screen, "Name", messageFont)
 
 snake = Snake(ceil(screenWidth / 2), ceil(screenHeight / 2), 20)
 apple = Apple(randrange(40, screenWidth - 40, 20), randrange(40, screenHeight - 40, 20))
+spider = Spider(snake, apple)
 
 playing_music = False
 
 print("Game is starting..")
 while not done:
+    spider_luck = random()
+    stateChanged = False
+
     if not playing_music:
         menuMusic.stop()
         playingMusic.play(loops=-1)
         playing_music = True
-    stateChanged = False
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             quitGame(screen, False)
@@ -75,7 +80,7 @@ while not done:
                 snakeHeadSprite = snake.moveLeft(snakeHeadSprite)
             elif event.key == pygame.K_ESCAPE:
                 stateChanged = True
-                pauseGame(screen)
+                pauseGame(screen, myFont)
             elif event.key == pygame.K_KP_PLUS:
                 delay += 5
             elif event.key == pygame.K_KP_MINUS:
@@ -91,12 +96,20 @@ while not done:
     # Draw Apple
     screen.blit(appleSprite, (apple.x, apple.y))
 
+    # Draw Spider
+    if spider.isVisible():
+        screen.blit(spider.sprite, (spider.x, spider.y))
+        spider.visible = True
+    else:
+        if spider_luck > 0.99:
+            screen.blit(spider.sprite, (spider.x, spider.y))
+            spider.visible = True
+
     # Check & Update & Draw Snake
-    snake.update(delay)
-    if snake.checkCollision(apple):
+    if snake.checkCollision(apple, spider):
         appleEatenSound.play()
-        snake.total += 1
         apple.pickLocation(snake)
+        spider.pickLocation(snake, apple)
     if snake.checkSelf():
         playingMusic.stop()
         gameoverMusic.play()
@@ -119,10 +132,11 @@ while not done:
             done = True
         else:
             resetGame(snake)
+    snake.update()
     if not done:
-        screen.blit(snakeHeadSprite, (snake.x[0], snake.y[0]))
         for i in range(1, snake.total, 1):
             screen.blit(snakeBodyTile, (snake.x[i], snake.y[i]))
+        screen.blit(snakeHeadSprite, (snake.x[0], snake.y[0]))
 
     # Draw Score & FPS
     scoreLabel = myFont2.render("Score = " + str(snake.score), 0, BLACK)

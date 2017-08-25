@@ -155,7 +155,7 @@ def saveData(screen, name, snake):
         json.dump(data, outfile)
 
 
-def pauseGame(screen):
+def pauseGame(screen, myFont):
     print("Game Paused..")
     pause = True
     while pause:

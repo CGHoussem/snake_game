@@ -7,10 +7,12 @@ import pygame
 class Snake:
     x = [0, 0]
     y = [0, 20]
+    cell_direction = [0, 0]
     radius = 0
     direction = 0
     total = 2
     score = 0
+    speed = 20
 
     def __init__(self, x, y, radius):
         self.x[0] = x
@@ -22,14 +24,14 @@ class Snake:
             self.x[i] = self.x[i - 1]
             self.y[i] = self.y[i - 1]
 
-        if self.direction == 0:
-            self.y[0] -= 20
-        if self.direction == 1:
-            self.y[0] += 20
-        if self.direction == 2:
-            self.x[0] += 20
-        if self.direction == 3:
-            self.x[0] -= 20
+        if self.direction == 0:  # UP
+            self.y[0] -= self.speed
+        if self.direction == 1:  # DOWN
+            self.y[0] += self.speed
+        if self.direction == 2:  # RIGHT
+            self.x[0] += self.speed
+        if self.direction == 3:  # LEFT
+            self.x[0] -= self.speed
 
     def moveUp(self, sprite):
         if not (self.direction == 1 or self.direction == 0):

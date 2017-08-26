@@ -13,7 +13,7 @@ from Includes.functions import *
 [screen, clock, myFont, myMenuFont, messageFont,
  myFont2, grassTile, wallTile, appleSprite,
  snakeHeadSprite, snakeBodyTile, appleEatenSound, gameoverMusic,
- playingMusic, menuMusic, delay, starting, menu, done, retry] = init()
+ playingMusic, menuMusic, framerate, starting, menu, done, retry] = init()
 
 playButton = Button("Play Game", SCREEN_WIDTH / 2 - 75, SCREEN_HEIGHT / 2 - 55 - 5, 150, 50)
 scoresButton = Button("Scoreboard", SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 + 5, 200, 50)
@@ -83,11 +83,6 @@ while not done:
             elif event.key == pygame.K_ESCAPE:
                 stateChanged = True
                 pauseGame(screen, myFont)
-            elif event.key == pygame.K_KP_PLUS:
-                delay += 5
-            elif event.key == pygame.K_KP_MINUS:
-                if delay - 5 > 5:
-                    delay -= 5
 
     # Draw Background
     drawBackground(screen, grassTile)
@@ -147,11 +142,9 @@ while not done:
 
     # Draw Score & FPS
     scoreLabel = myFont2.render("Score = " + str(snake.score), 0, BLACK)
-    fpsLabel = myFont2.render("FPS = " + str(int(clock.get_fps())), 0, BLACK)
     playerLabel = myFont2.render("Name = " + name, 0, BLACK)
     screen.blit(playerLabel, (20 * 2, SCREEN_HEIGHT - (20 * 2) - scoreLabel.get_height()))
-    screen.blit(fpsLabel, (20 * 2, SCREEN_HEIGHT - (20 * 3) - scoreLabel.get_height()))
-    screen.blit(scoreLabel, (20 * 2, SCREEN_HEIGHT - (20 * 4) - scoreLabel.get_height()))
+    screen.blit(scoreLabel, (20 * 2, SCREEN_HEIGHT - (20 * 3) - scoreLabel.get_height()))
 
     pygame.display.flip()
 
@@ -159,6 +152,6 @@ while not done:
         pygame.time.delay(1000)
         starting = False
 
-    clock.tick(delay)
+    clock.tick(framerate)
 
 quitGame(screen, True, name, snake)

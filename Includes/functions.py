@@ -30,7 +30,7 @@ def init():
     playingMusic = pygame.mixer.Sound("Sounds/playing.wav")
     menuMusic = pygame.mixer.Sound("Sounds/menu.wav")
 
-    delay = 10
+    framerate = 10
     starting = True
     menu = True
     done = True
@@ -43,7 +43,7 @@ def init():
             snakeHeadSprite, snakeBodyTile,
             appleEatenSound, gameoverMusic,
             playingMusic, menuMusic,
-            delay, starting,
+            framerate, starting,
             menu, done, retry]
 
 

@@ -127,13 +127,18 @@ while not done:
         playingMusic.stop()
         gameoverMusic.play()
         playing_music = False
-        display_box(screen, "Snake got smashed into the wall!", myMenuFont, False)
+        display_box(screen, "Snake bumped into the wall!", myMenuFont, False)
         pygame.time.delay(2500)
-        answer = ask(screen, "Retry ? (y/n)", messageFont)
-        if answer == 'n':
-            done = True
-        else:
-            resetGame(snake)
+        answer = 'o'
+        while answer == 'o':
+            answer = ask(screen, "Retry ? (y/n)", messageFont)
+            if answer == 'n':
+                done = True
+            elif answer == 'y':
+                resetGame(snake)
+            else:
+                answer = 'o'
+
     snake.update()
     if not done:
         for i in range(1, snake.total, 1):
@@ -143,8 +148,10 @@ while not done:
     # Draw Score & FPS
     scoreLabel = myFont2.render("Score = " + str(snake.score), 0, BLACK)
     fpsLabel = myFont2.render("FPS = " + str(int(clock.get_fps())), 0, BLACK)
-    screen.blit(scoreLabel, (20 * 2, SCREEN_HEIGHT - (20 * 2) - scoreLabel.get_height()))
+    playerLabel = myFont2.render("Name = " + name, 0, BLACK)
+    screen.blit(playerLabel, (20 * 2, SCREEN_HEIGHT - (20 * 2) - scoreLabel.get_height()))
     screen.blit(fpsLabel, (20 * 2, SCREEN_HEIGHT - (20 * 3) - scoreLabel.get_height()))
+    screen.blit(scoreLabel, (20 * 2, SCREEN_HEIGHT - (20 * 4) - scoreLabel.get_height()))
 
     pygame.display.flip()
 

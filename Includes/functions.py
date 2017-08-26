@@ -121,9 +121,11 @@ def showScores(screen, myMenuFont, myFont2):
                 playerScoreLabel = myFont2.render(player['name'] + " ........................ " + str(player['score']), 0, WHITE)
                 screen.blit(playerScoreLabel, (SCREEN_WIDTH / 2 - playerScoreLabel.get_width() / 2, count + playerScoreLabel.get_height()))
     else:
-        titleLabel = myMenuFont.render("Scoreboard is empty", 0, WHITE)
+        titleLabel = myMenuFont.render("Scoreboard is empty", 1, WHITE)
         screen.blit(titleLabel, (SCREEN_WIDTH / 2 - titleLabel.get_width() / 2, SCREEN_HEIGHT / 2 - titleLabel.get_height() / 2))
 
+    continueLabel = myFont2.render("Press RETURN to continue...", 1, WHITE)
+    screen.blit(continueLabel, (SCREEN_WIDTH - continueLabel.get_width() - 20, SCREEN_HEIGHT - continueLabel.get_height() - 20))
     pygame.display.flip()
 
     while scoresPause:

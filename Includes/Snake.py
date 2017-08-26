@@ -74,24 +74,21 @@ class Snake:
             self.score += 1
             self.total += 1
             return True
-        if self.x[0] == spider.x and self.y[0] == spider.y:
-            spider.visible = False
-            self.total += 2
-            self.x.append(0)
-            self.y.append(0)
-            self.x.append(0)
-            self.y.append(0)
+        if spider.isVisible():
+            if self.x[0] == spider.x and self.y[0] == spider.y:
+                spider.visible = False
+                self.total += 2
+                self.x.append(0)
+                self.y.append(0)
+                self.x.append(0)
+                self.y.append(0)
 
-            self.x.insert(self.total - 2, self.x[self.total - 2])
-            self.y.insert(self.total - 2, self.y[self.total - 2])
-            self.x.insert(self.total - 1, self.x[self.total - 1])
-            self.y.insert(self.total - 1, self.y[self.total - 1])
-            #self.x.append(self.x[self.total - 2])
-            #self.y.append(self.y[self.total - 2])
-            #self.x.append(self.x[self.total - 1])
-            #self.y.append(self.y[self.total - 1])
-            self.score += 2
-            return True
+                self.x.insert(self.total - 2, self.x[self.total - 2])
+                self.y.insert(self.total - 2, self.y[self.total - 2])
+                self.x.insert(self.total - 1, self.x[self.total - 1])
+                self.y.insert(self.total - 1, self.y[self.total - 1])
+                self.score += 2
+                return True
 
     def checkSelf(self):
         for i in range(1, self.total, 1):
@@ -99,7 +96,7 @@ class Snake:
                 return True
 
     def checkBorders(self):
-        if (self.x[0] >= screenWidth - self.radius or self.x[0] < self.radius):
+        if (self.x[0] >= SCREEN_WIDTH - self.radius or self.x[0] < self.radius):
             return True
         if (self.y[0] < self.radius or self.y[0] >= SCREEN_HEIGHT - self.radius):
             return True
@@ -107,4 +104,4 @@ class Snake:
     def reset(self):
         self.total = 2
         self.score = 0
-        self.x[0], self.y[0] = ceil(screenWidth / 2), ceil(SCREEN_HEIGHT / 2)
+        self.x[0], self.y[0] = ceil(SCREEN_WIDTH / 2), ceil(SCREEN_HEIGHT / 2)
